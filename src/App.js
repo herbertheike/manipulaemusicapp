@@ -1,25 +1,35 @@
 import logo from './logo.svg';
+import { connect } from 'react-redux';
 import './App.css';
+import { bindActionCreators } from 'redux';
+import { clickButton } from './actions';
+import { Component } from 'react';
+import Main from './views/main';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+  state = {
+    inputValue: ''
+  }
+  inputChange = event => {
+    this.setState({
+      inputValue: event.target.value
+    })
+  }
+
+  render(){
+    const {  clickButton,newValue } = this.props;
+    const { inputValue } = this.state;
+    return (
+      <Main />
+    )
+  }
 }
 
-export default App;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ clickButton }, dispatch);
+
+const mapStateToProps = store => ({
+  newValue: store.clickState.newValue
+});
+export default connect(mapStateToProps,mapDispatchToProps)(App);
