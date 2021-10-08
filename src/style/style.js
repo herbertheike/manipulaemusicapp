@@ -15,6 +15,7 @@ export const Box = styled.div`
 `;
 export const Section = styled.div`
 align-items:center;
+justify-content: center;
   background-color: rgb(18, 18, 18);
   background-image: linear-gradient(
     180deg,
@@ -30,12 +31,13 @@ export const Grid = styled.div`
 
 export const List = styled.ul`
   justify-content: center;
+  align-items: center;
   list-style: none;
   margin: 0px;
   padding: 10px;
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 100%;
 `;
 
 export const ListItem = styled.li`
@@ -136,24 +138,28 @@ export const Menu = styled.div`
 export const SubTitle = styled.div`
 margin: 0;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 1.5rem;
     line-height: 1.334;
     letter-spacing: 0em;
 `;
-export const Label = styled.div`
+export const Label = styled.label`
     margin: 0px;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 1rem;
-    line-height: 1.75;
-    color: rgba(48, 48, 48, 0.7);    
+    line-height: 1.75rem;
+    color: rgba(48, 48, 48, 0.7);  
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display:block;
+    overflow: hidden;  
 `;
 export const Tag = styled.div`
     margin: 0px;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 400;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     line-height: 1.75;
     color: rgba(36, 36, 36, 0.7);
 `;
@@ -165,10 +171,12 @@ box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px,
 background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
 overflow: hidden;
 display: flex;
+max-width:520px;
 `;
 export const CardContent = styled.div`
-    padding: 12px;
+    padding: 11px;
     flex: 1 0 auto;
+    
 `;
 export const AlbumCover = styled.img`
     display: block;

@@ -83,44 +83,76 @@ class Main extends React.Component {
         <Grid>
           <Box>
             <Section style={{alignContent: 'center'}}>
+            {!this.props.song.data ?
+             
+             
             <List>
-                {this.props.song.data.map((item) => {
-                  return (
-                    <ListItem key={item.id}>
-                      <CardContainer
-                        sx={{
-                          display: "flex",
-                          width: "100%",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Box >
-                          <CardContent >
-                            <SubTitle>{item.title}</SubTitle>
-                            <Label>{item.artist.name} - {item.album.title}</Label>
-                            <Tag>
-                              {moment.utc(item.duration * 1000).format("mm:ss")}
-                              min
-                            </Tag>
-                          </CardContent>
-                          <Box>
-                            <AudioPlayer
-                              controls
-                              name="media"
-                              src={item.preview}
-                            />
-                          </Box>
-                        </Box>
-                        <AlbumCover
-                         src={item.album.cover_big}
-                          alt="Album cover"
+                <ListItem >
+                  <CardContainer>
+                    <Box >
+                      <CardContent >
+                        <SubTitle>Carregando...</SubTitle>
+                        <Label>Carregando...</Label>
+                        <Label style={{fontStyle:'italic', fontSize:'0.8rem'}}>Carregando...</Label>
+                        <Tag>
+                        Carregando...
+                        </Tag>
+                      </CardContent>
+                      <Box>
+                        <AudioPlayer
+                          controls
+                          name="media"
                         />
-                      </CardContainer>
-                    </ListItem>
-                  );
-                })}
-              </List>
-              <button></button>
+                      </Box>
+                    </Box>
+                    <AlbumCover
+                     src={"https://cdn-icons-png.flaticon.com/512/1384/1384061.png"}
+                      alt="Album cover"
+                    />
+                  </CardContainer>
+                </ListItem>
+          </List>
+             :
+            
+            <List>
+            {this.props.song.data.map(item => {
+              return (
+                <ListItem key={item.id}>
+                  <CardContainer
+                    sx={{
+                      display: "flex",
+                      width: "100%",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Box >
+                      <CardContent >
+                        <SubTitle>{item.title}</SubTitle>
+                        <Label>{item.artist.name}</Label>
+                        <Label style={{fontStyle:'italic', fontSize:'0.8rem'}}>{item.album.title}</Label>
+                        <Tag>
+                          {moment.utc(item.duration * 1000).format("mm:ss")}
+                          min
+                        </Tag>
+                      </CardContent>
+                      <Box>
+                        <AudioPlayer
+                          controls
+                          name="media"
+                          src={item.preview}
+                        />
+                      </Box>
+                    </Box>
+                    <AlbumCover
+                     src={item.album.cover_big}
+                      alt="Album cover"
+                    />
+                  </CardContainer>
+                </ListItem>
+              );
+            })}
+          </List>}             
+              
             </Section>
           </Box>
         </Grid>

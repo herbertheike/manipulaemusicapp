@@ -22,7 +22,7 @@ export function getData(){
 export function searchTerm(data){
   return async function(dispatch) {
     return await api
-    .get("/search/?q=" + data+"&order=RATING_DESC", {
+    .get("/search/?q=" + data+"&order=RANKING", {
       method: "GET",
       mode: "no-cors",
       headers: {
@@ -47,5 +47,5 @@ const getDataSuccess = (data) =>{
   return {
       type: GET_DATA_SUCCESS,
       song:data
-  }
+      }
 }
