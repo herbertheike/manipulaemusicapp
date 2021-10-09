@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import Container from "@mui/material/Container";
 import {
   Container,
   Box,
@@ -19,25 +18,23 @@ import {
   CardContainer,
   CardContent,
   AlbumCover,
+  Button,
 } from "../style/style";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import Typography from "@mui/material/Typography";
-import api from "../services/api";
+import { Link } from "react-router-dom";
 
-import {connect} from 'react-redux'
-import { getData,searchTerm } from  '../actions'
+import { connect } from "react-redux";
+import { getData, searchTerm, insertFav } from "../actions";
 import moment from "moment";
-
-
-class Main extends React.Component {
+import CardMusic from "../components/cardMusic";
+class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = { search: '' };
+    this.state = { search: "", fav: false };
   }
 
-  componentDidMount = async () => {
+  componentDidMount =  () => {
     this.props.getData();
   };
 
@@ -46,26 +43,26 @@ class Main extends React.Component {
   searchComponent = async (e) => {
     var term = this.state.search;
     if (e.keyCode === 13) {
-      if (term === '') {
+      if (term === "") {
         this.props.getData();
       } else {
-        this.props.searchTerm(term)
+        this.props.searchTerm(term);
       }
     }
   };
+
   handleChange = (e) => {
     var value = e.target.value;
     this.setState({ search: value });
   };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <Container>
-        <Box>
           <Topbar>
             <Menu>
-              <MenuIcon />
+              <Link to="/favorites"><MenuIcon /></Link>
               <Title>App Musica Manipulaê</Title>
               <SearchContainer>
                 <SearchOutlinedIcon />
@@ -79,95 +76,104 @@ class Main extends React.Component {
               </SearchContainer>
             </Menu>
           </Topbar>
-        </Box>
         <Grid>
-          <Box>
-            <Section style={{alignContent: 'center'}}>
-            {!this.props.song.data ?
-             
-             
-            <List>
-                <ListItem >
-                  <CardContainer>
-                    <Box >
-                      <CardContent >
-                        <SubTitle>Carregando...</SubTitle>
-                        <Label>Carregando...</Label>
-                        <Label style={{fontStyle:'italic', fontSize:'0.8rem'}}>Carregando...</Label>
-                        <Tag>
-                        Carregando...
-                        </Tag>
-                      </CardContent>
+            <Section style={{ alignContent: "center" }}>
+              {!this.props.song.data ? (
+                <List>
+                  <ListItem>
+                    <CardContainer>
                       <Box>
-                        <AudioPlayer
-                          controls
-                          name="media"
-                        />
+                        <CardContent>
+                          <SubTitle>Carregando...</SubTitle>
+                          <Label>Carregando...</Label>
+                          <Label
+                            style={{ fontStyle: "italic", fontSize: "0.8rem" }}
+                          >
+                            Carregando...
+                          </Label>
+                          <Tag>Carregando...</Tag>
+                        </CardContent>
+                        <Box>
+                          <AudioPlayer controls name="media" />
+                        </Box>
                       </Box>
-                    </Box>
-                    <AlbumCover
-                     src={"https://cdn-icons-png.flaticon.com/512/1384/1384061.png"}
-                      alt="Album cover"
-                    />
-                  </CardContainer>
-                </ListItem>
-          </List>
-             :
-            
-            <List>
-            {this.props.song.data.map(item => {
-              return (
-                <ListItem key={item.id}>
-                  <CardContainer
-                    sx={{
-                      display: "flex",
-                      width: "100%",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Box >
-                      <CardContent >
-                        <SubTitle>{item.title}</SubTitle>
-                        <Label>{item.artist.name}</Label>
-                        <Label style={{fontStyle:'italic', fontSize:'0.8rem'}}>{item.album.title}</Label>
-                        <Tag>
-                          {moment.utc(item.duration * 1000).format("mm:ss")}
-                          min
-                        </Tag>
-                      </CardContent>
-                      <Box>
-                        <AudioPlayer
-                          controls
-                          name="media"
-                          src={item.preview}
+                      <AlbumCover
+                        src={
+                          "https://cdn-icons-png.flaticon.com/512/1384/1384061.png"
+                        }
+                        alt="Album cover"
+                      />
+                    </CardContainer>
+                  </ListItem>
+                </List>
+              ) : (
+                <List>
+                  {this.props.song.data.map((item) => {
+                    return (
+                      <CardContainer>
+                        <CardMusic
+                        id={
+                          item.id
+                        }
+                        title={
+                          item.title
+                        }
+                        artist={
+                          item.artist.name
+                        }
+                        album={
+                          item.album.title
+                        }
+                        duration={
+                          item.duration
+                        }
+                        preview={
+                          item.preview
+                        }
+
+                        albumcover={
+                          item.album.cover_big
+                        }
+                        link={
+                          item.link
+                        }
                         />
-                      </Box>
-                    </Box>
-                    <AlbumCover
-                     src={item.album.cover_big}
-                      alt="Album cover"
-                    />
-                  </CardContainer>
-                </ListItem>
-              );
-            })}
-          </List>}             
-              
+                        <Button
+                      onClick={()=>this.props.insertFav(
+                        item.id,
+                        item.title,
+                        item.artist.name,
+                        item.album.title,
+                        item.duration,
+                        item.preview,
+                        item.album.cover_big,
+                        item.link
+                          )
+                          }
+                          >s
+                          Adicionar aos favoritos
+                          </Button>
+                          
+                      </CardContainer>
+                      
+                    )
+                    
+                  })}
+                </List>
+                
+              )}
             </Section>
-          </Box>
+            
         </Grid>
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({song:state.song})
+const mapStateToProps = (state) => ({ song: state.song, favArr: state.favArr });
 
-
-export default connect(
-  mapStateToProps,
-  {
-    getData,
-    searchTerm
-  }
-)(Main);
+export default connect(mapStateToProps, {
+  getData,
+  searchTerm,
+  insertFav,
+})(Main);

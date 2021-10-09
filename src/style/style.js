@@ -36,7 +36,6 @@ export const List = styled.ul`
   margin: 0px;
   padding: 10px;
   position: relative;
-  width: 100%;
   max-width: 100%;
 `;
 
@@ -65,7 +64,6 @@ export const Topbar = styled.header`
   z-index: 1;
 `;
 export const AudioPlayer = styled.audio`
-  padding: 10px;
   width: 320px;
   height: 30px;
 `;
@@ -136,24 +134,34 @@ export const Menu = styled.div`
     min-height: 56px;
 `;
 export const SubTitle = styled.div`
-margin: 0;
+    margin: 0;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-weight: bold;
-    font-size: 1.5rem;
-    line-height: 1.334;
+    font-size: 1rem;
     letter-spacing: 0em;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;  
 `;
 export const Label = styled.label`
     margin: 0px;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 0.8rem;
     line-height: 1.75rem;
     color: rgba(48, 48, 48, 0.7);  
-    text-overflow: ellipsis;
-    word-wrap: break-word;
+
     display:block;
-    overflow: hidden;  
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    &:hover {s
+      outline: none;
+      overflow: visible;
+      white-space: wrap;
+      word-wrap: break-word;
+      transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
 `;
 export const Tag = styled.div`
     margin: 0px;
@@ -171,20 +179,59 @@ box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px,
 background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
 overflow: hidden;
 display: flex;
-max-width:520px;
+max-width:600px;
+flex-direction: row;
 `;
 export const CardContent = styled.div`
     padding: 11px;
-    flex: 1 0 auto;
+    flex: 1 0;
+    flex-direction: column;
+    width: 400px;
     
 `;
 export const AlbumCover = styled.img`
     display: block;
-    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    height:10rem;
+    height:8rem;
     object-fit: cover;
     max-width: 10rem;
+`;
+export const Button = styled.button`
+display: inline-flex;
+align-items: center;
+justify-content: center;
+position: relative;
+box-sizing: border-box;
+background-color: rgb(105,153,232);
+outline: 0px;
+margin: 0px;
+cursor: pointer;
+vertical-align: middle;
+font-family: Roboto, Helvetica, Arial, sans-serif;
+font-weight: 500;
+font-size: 0.6rem;
+line-height: 1.75;
+letter-spacing: 0.02857em;
+text-transform: uppercase;
+min-width: 64px;
+padding: 5px 15px;
+border-radius: 4px;
+border: 1px solid rgba(144, 202, 249, 0.5);
+color: rgb(255, 255, 255);
+&:hover{
+  background-color: rgb(255,255,255);
+  color: rgb(105,153,232);
+}
+`;
+export const A = styled.a`
+    color:rgb(0,0,0);
+    text-decoration: none;
+    &:hover{
+      background-color: rgb(255,255,255);
+      color: rgb(105,153,232);
+    }
+    &:after{
+      color:rgb(123,456,231)
+    }
 `;
