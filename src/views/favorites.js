@@ -27,23 +27,24 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CardMusic from "../components/cardMusic";
 import { Link } from "react-router-dom";
 import { deleteFav } from "../actions";
+import ReactPaginate from 'react-paginate'; 
 export class favorites extends Component {
   constructor(props) {
     super(props);
-    this.state = { search: "", fav: false };
+    this.state = { search: "", fav: false, pagecount:1,currentpage:0, musicsperpage:10, initialState:null};
   }
 
   componentDidMount = async () => {
-    // this.props.getData();
+    this.pagination();
   };
 
   searchComponent = async (e) => {
     var term = this.state.search;
     if (e.keyCode === 13) {
       if (term === "") {
-        //this.props.getData();
+       
       } else {
-        // this.props.searchTerm(term);
+        
       }
     }
   };
@@ -58,28 +59,52 @@ export class favorites extends Component {
     newarr.splice(id, 1);
     this.props.deleteFav(newarr)
   }
+  
+  
+  pagination=()=>{
+    let pgc = 0;
+    if(this.props.favLength === 0){
+      pgc = 100 / this.state.musicsperpage;
+      this.setState({pagecount:pgc}) 
+      console.log(this.state.pagecount+"001")
+    }else{
+    pgc = this.props.favLength / this.state.musicsperpage;
+    this.setState({pagecount:pgc}) 
+    console.log(this.state.pagecount+"002")
+    }
+  }
+
+  handlePage=(e)=>{
+    this.pagination();
+    let selected = e.selected;
+    console.log(selected)
+    this.setState({currentpage:selected})
+  }
 
   render() {
     return (
       <Container>
-        <Topbar>
-          <Menu>
-            <Link to="/main">
-              <MenuIcon />
-            </Link>
-            <Title>App Musica Manipulaê</Title>
-            <SearchContainer>
-              <SearchOutlinedIcon />
-              <SearchInput
-                type="text"
-                placeholder="Buscar"
-                value={this.state.search}
-                onChange={(e) => this.handleChange(e)}
-                //onKeyDown={this.searchComponent}
-              />
-            </SearchContainer>
-          </Menu>
-        </Topbar>
+          <Topbar>
+            <Menu>  
+                    <ul className='menu'>
+                      <li><Link to="/">Home</Link></li>
+                      <li><Link to="/favorites">Favoritos</Link></li>
+                    </ul>     
+            <Title>Desafio Manipulaê</Title>
+
+            
+              <SearchContainer>
+                <SearchOutlinedIcon />
+                <SearchInput
+                  type="text"
+                  placeholder="Buscar"
+                  value={this.state.search}
+                  onChange={(e) => this.handleChange(e)}
+                  onKeyDown={this.searchComponent}
+                />
+              </SearchContainer>
+            </Menu>
+          </Topbar>
         <Grid>
           <Section style={{ alignContent: "center" }}>
             {!this.props.favArr ? (
@@ -112,9 +137,9 @@ export class favorites extends Component {
               </List>
             ) : (
               <List>
-                {this.props.favArr.map((item) => {
+                {this.props.favArr.slice(this.state.currentpage*this.state.musicsperpage,(this.state.currentpage+1)*this.state.musicsperpage).map((item) => {
                   return (
-                    <Box>
+                    <ListItem>
                       <CardMusic
                         id={item.id}
                         title={item.title}
@@ -125,16 +150,31 @@ export class favorites extends Component {
                         albumcover={item.albumcover}
                         link={item.link}
                       />
-                      <Button onClick={()=>//console.log(this.props.favArr.indexOf(item))
+                      <Button onClick={()=>
                       this.delete_fav(this.props.favArr, this.props.favArr.indexOf(item))
                     }>
                           Excluir Musica
                       </Button>
-                    </Box>
+                      </ListItem>
                   );
                 })}
               </List>
             )}
+            {<ReactPaginate
+              pageCount={this.state.pagecount}
+              pageRange={1}
+              marginPagesDisplayed={1}
+              onPageChange={this.handlePage}
+              containerClassName={"container"}
+              previousLinkClassName={'page'}
+              breakClassName={'page'}
+              nextLinkClassName={'page'}
+              pageClassName={'page'}
+              disabledClassNme={'disabled'}
+              activeClassName={'active'}
+              previousLabel={"<"}
+              nextLabel={">"}
+				      />}
           </Section>
         </Grid>
       </Container>
@@ -142,6 +182,6 @@ export class favorites extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ favArr: state.favArr, id:state.id});
+const mapStateToProps = (state) => ({ favArr: state.favArr, favLength:state.favLength});
 
 export default connect(mapStateToProps, {deleteFav})(favorites);

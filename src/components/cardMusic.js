@@ -38,7 +38,6 @@ const CardMusic = ({
   link,
 }) => {
   return (
-    <ListItem key={id}>
       <CardContainer>
         <CardContent>
           <SubTitle><A href={link} target="_blank">
@@ -55,7 +54,6 @@ const CardMusic = ({
             <AlbumCover src={albumcover} alt="Album cover" />
        
       </CardContainer>
-    </ListItem>
   );
 };
 

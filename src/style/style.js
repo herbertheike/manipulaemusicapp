@@ -14,14 +14,12 @@ export const Box = styled.div`
   flex-direction: column;
 `;
 export const Section = styled.div`
-align-items:center;
-justify-content: center;
   background-color: rgb(18, 18, 18);
+  min-height:100vh;
   background-image: linear-gradient(
     180deg,
-    rgba(141, 255, 156, 1) 0%,
-    rgba(197, 255, 95, 1) 50%,
-    rgba(0, 128, 90, 1) 100%
+    #41295a 0%,  
+    #2F0743 100%
   );
 `;
 //rgba(243,243,72,1) 0%, rgba(65,170,111,0.43) 100%)
@@ -33,7 +31,7 @@ export const List = styled.ul`
   justify-content: center;
   align-items: center;
   list-style: none;
-  margin: 0px;
+  margin:0px;
   padding: 10px;
   position: relative;
   max-width: 100%;
@@ -48,15 +46,15 @@ export const ListItem = styled.li`
   width: 100%;
   box-sizing: border-box;
   text-align: left;
-  padding: 0.25rem;
+  padding-bottom: 0.25rem;
 `;
 
 export const Topbar = styled.header`
   background-color: #1976d2;
-  background-image: radial-gradient(
-    circle,
-    rgba(108, 160, 229, 1) 0%,
-    rgba(89, 103, 255, 1) 100%
+  background-image: linear-gradient(
+    90deg,
+    #000000 0%,
+    #434343 100%
   );
   color: white;
   position: sticky;
@@ -74,10 +72,10 @@ display: flex;
 align-items: center;
 justify-content: center;
 position:relative;
-background-color: rgba(108,160,229, 1);
+background-color: #434343;
 
   &:focus {
-    background: rgba(108,160,229, 1);
+    background: #434343;
     color: white;
     outline: none;
     width: 20ch;
@@ -96,14 +94,14 @@ letter-spacing: inherit;
 color: gray; 
 border: 0px; 
 box-sizing: content-box;
-background-color: rgba(108,160,229, 1); 
+background-color: transparent; 
 height: 1.4375em;
 margin: 0px;
 display: block;
 border: none;
 border-radius:0.3rem;
 &:focus {
-    background: rgba(108,160,229, 1);
+    background: transparent;
     color: white;
     outline: none;
     width: 20ch;
@@ -112,7 +110,7 @@ border-radius:0.3rem;
 `;
 
 export const Title = styled.title`
-    display:block;
+    display:contents;
     margin: 0px;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 500;
@@ -132,6 +130,7 @@ export const Menu = styled.div`
     padding-left: 16px;
     padding-right: 16px;
     min-height: 56px;
+    justify-content: space-around;
 `;
 export const SubTitle = styled.div`
     margin: 0;
@@ -150,16 +149,15 @@ export const Label = styled.label`
     font-size: 0.8rem;
     line-height: 1.75rem;
     color: rgba(48, 48, 48, 0.7);  
-
     display:block;
-    text-overflow:ellipsis;
-    overflow: hidden;
     white-space: nowrap;
-    &:hover {s
-      outline: none;
-      overflow: visible;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width:320px;
+    &:hover {
+      display:block;
+      overflow:visible;
       white-space: wrap;
-      word-wrap: break-word;
       transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }
 `;
@@ -175,10 +173,10 @@ export const CardContainer = styled.div`
 background-color: white;
 transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 border-radius: 4px;
-box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
 background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
 overflow: hidden;
 display: flex;
+margin-right:0.25rem;
 max-width:600px;
 flex-direction: row;
 `;
@@ -186,7 +184,7 @@ export const CardContent = styled.div`
     padding: 11px;
     flex: 1 0;
     flex-direction: column;
-    width: 400px;
+    max-width: 320px;
     
 `;
 export const AlbumCover = styled.img`
@@ -198,12 +196,13 @@ export const AlbumCover = styled.img`
     max-width: 10rem;
 `;
 export const Button = styled.button`
-display: inline-flex;
+display: flex;
+padding-left: 16px;
 align-items: center;
 justify-content: center;
 position: relative;
 box-sizing: border-box;
-background-color: rgb(105,153,232);
+background-image: linear-gradient(130deg,#232526, #414345);
 outline: 0px;
 margin: 0px;
 cursor: pointer;
@@ -213,15 +212,16 @@ font-weight: 500;
 font-size: 0.6rem;
 line-height: 1.75;
 letter-spacing: 0.02857em;
-text-transform: uppercase;
-min-width: 64px;
+text-transform: uppercase;;
+width:120px;
+height:8rem;
 padding: 5px 15px;
 border-radius: 4px;
-border: 1px solid rgba(144, 202, 249, 0.5);
+border: 0px;
 color: rgb(255, 255, 255);
 &:hover{
-  background-color: rgb(255,255,255);
-  color: rgb(105,153,232);
+  background-image: linear-gradient(150deg,#434343, #000000);
+  color: rgb(255, 255, 255);
 }
 `;
 export const A = styled.a`

@@ -5,19 +5,29 @@ const initialState = {
     song: [],
     favArr:[],
     arrnew:[],
+    length:0,
+    favLength:0,
   
 };
 const reducer = (state = initialState, action) => {
     console.log(action)
     switch (action.type) {
         case GET_DATA_SUCCESS:
-            return {...state, song:action.song};
+            let length = action.song.data.length;
+            console.log(length);
+            return {...state, song:action.song, length:length};
         case SEARCHTERM:
-            return {...state, song:action.searchterm};
+            let slength = action.searchterm.data.length;
+            console.log(slength);
+            return {...state, song:action.searchterm,length:slength};
         case INSERT_FAV:
-            return {...state, favArr:state.favArr.concat(action.favArr)}
+            let flength = state.favArr.length;
+            console.log(flength)
+            return {...state, favArr:state.favArr.concat(action.favArr), favLength:flength}
         case DELETE_FAV:
-            return {...state, favArr:action.arrnew};
+            let delflength = state.favLength-1;
+            console.log(delflength)
+            return {...state, favArr:action.arrnew, favLength:delflength};
         default:
             return state;
     }

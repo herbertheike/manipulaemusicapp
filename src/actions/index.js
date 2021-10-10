@@ -21,7 +21,7 @@ export function getData(){
 export function searchTerm(data){
   return async function(dispatch) {
     return await api
-    .get("/search/?q=" + data+"&order=RANKING", {
+    .get("/search/?q=" + data+"&order=RANKING&index=0&limit=100", {
       method: "GET",
       mode: "no-cors",
       headers: {
@@ -30,7 +30,6 @@ export function searchTerm(data){
       },
     })
     .then((response) => {
-      
     dispatch(search(response.data));
   })
 } 
@@ -60,15 +59,18 @@ export function deleteFav(array){
 }
 
 const search = (data) =>{
+  console.log(data.length)
   return {
       type: SEARCHTERM,
       searchterm:data,
+      length:data.length
   }
 }
 
 const getDataSuccess = (data) =>{
   return {
       type: GET_DATA_SUCCESS,
-      song:data
+      song:data,
+      length:data.length
       }
 }
