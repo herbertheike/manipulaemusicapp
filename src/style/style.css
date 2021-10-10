@@ -54,6 +54,7 @@
 }
 
 .break{
+    cursor: pointer; 
 }
 
 .next{
