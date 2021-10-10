@@ -1,5 +1,8 @@
 # Desafio Manipulaé
 ### HERBERTH EIKE ALVES DE MIRANDA
+
+Antes de iniciar, execute o comando `yarn install` para instalar as dependencias.
+
 ## Scripts Disponiveis
 ### `yarn start`
 
