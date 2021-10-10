@@ -1,4 +1,4 @@
-import {GET_DATA_SUCCESS, SEARCHTERM, INSERT_FAV, DELETE_FAV, GET_FAV} from '../actions/actionTypes';
+import {GET_DATA_SUCCESS, SEARCHTERM, INSERT_FAV, DELETE_FAV} from '../actions/actionTypes';
 
 const initialState = {
     searchterm:'',

@@ -20,13 +20,11 @@ import {
   AlbumCover,
   Button,
 } from "../style/style";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { getData, searchTerm, insertFav } from "../actions";
-import moment from "moment";
 import CardMusic from "../components/cardMusic";
 import ReactPaginate from 'react-paginate'; 
 import '../style/style.css'
@@ -83,19 +81,8 @@ class Main extends Component {
     console.log(selected)
     this.setState({currentpage:selected})
   }
-
- updatemenu() {
-    if (document.getElementById('responsive-menu').checked == true) {
-      document.getElementById('menu').style.borderBottomRightRadius = '0';
-      document.getElementById('menu').style.borderBottomLeftRadius = '0';
-    }else{
-      document.getElementById('menu').style.borderRadius = '10px';
-    }
-  }
-
   render() {
     console.log(this.props);
-    let menulista = "menulistaoff"
     return (
       <Container>
            <Topbar>

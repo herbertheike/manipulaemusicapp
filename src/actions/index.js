@@ -1,12 +1,12 @@
-import {GET_DATA_SUCCESS,SEARCHTERM, INSERT_FAV, DELETE_FAV, GET_FAV} from './actionTypes';
+import {GET_DATA_SUCCESS,SEARCHTERM, INSERT_FAV, DELETE_FAV} from './actionTypes';
 import api from '../services/api';
 
 export function getData(){
   return async function(dispatch) {
       return await api
-      .get("/chart/0/tracks?index=0&limit=100", {
+      .get("/chart/0/tracks?index=0&limit=100&output=json", {
         method: "GET",
-        mode: "no-cors",
+        mode: "nocors",
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export function getData(){
 export function searchTerm(data){
   return async function(dispatch) {
     return await api
-    .get("/search/?q=" + data+"&order=RANKING&index=0&limit=100", {
+    .get("/search/?q=" + data+"&order=RANKING&index=0&limit=100&output=json", {
       method: "GET",
       mode: "no-cors",
       headers: {

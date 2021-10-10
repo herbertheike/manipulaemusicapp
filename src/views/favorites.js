@@ -20,9 +20,7 @@ import {
   CardContent,
   AlbumCover,
   Button,
-  A,
 } from "../style/style";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CardMusic from "../components/cardMusic";
 import { Link } from "react-router-dom";
@@ -42,9 +40,9 @@ export class favorites extends Component {
     var term = this.state.search;
     if (e.keyCode === 13) {
       if (term === "") {
-       
+       //manter lista favoritos
       } else {
-        
+        //buscar nos favoritos
       }
     }
   };
